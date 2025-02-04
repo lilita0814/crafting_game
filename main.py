@@ -3,9 +3,9 @@ import craft
 
 def main():
     grid = [
-        ['', 'minecraft:stone', 'minecraft:stone'],
         ['', '', ''],
-        ['', '', '']
+        ['white_wool', 'white_wool', 'white_wool'],
+        ['oak_planks', 'oak_planks', 'oak_planks']
     ]
     result = craft.craft_item(grid)
     print(result)
