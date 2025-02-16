@@ -6,9 +6,10 @@ import configs
 
 def craft_item(grid) -> Optional[str]:
     # turn None to empty str
-    cur_pattern = [['' if i is None else
-                    'minecraft:' + i if ('minecraft:' not in i and i) else i
-                    for i in row] for row in grid]
+    cur_pattern = [['' if not i else
+                    'minecraft:' + i if not i.startswith('minecraft:') else i
+                    for i in row]
+                   for row in grid]
 
     # empty
     if all(all(cell == '' for cell in row) for row in cur_pattern):
@@ -27,9 +28,8 @@ def craft_item(grid) -> Optional[str]:
                          configs.ALL_RECIPES)
 
     for recipe in all_recipes:
-        # if recipe.get('result', {}).get('id') != 'minecraft:torch':
+        # if recipe.get('result', {}).get('id') != 'minecraft:white_bed':
         #     continue
-        # replace key
         recipe_keys = recipe.get('key', {})
         keyed_pattern = cur_pattern[:]
         for k, v in recipe_keys.items():
